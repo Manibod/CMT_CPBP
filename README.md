@@ -90,11 +90,19 @@ Implementing a new constraint on the generated melodies
     -   model&#46;name: The name of the CP model in minicpbp to use.
     -   model.min\_nb\_notes: The minimum number of notes to have in the first span of x bars. This option is only relevant when the `rhythmAtleast` CP model is used.
     -   weight\_variation.technique: The technique to use to vary the oracle constraint's weight during the generation of the melodies.
+		- constant: The weight is fixed to a given value during the generation.
+		- linear_up_reset: The weight is linearly increasing. Resets after x bars.
+		- linear_down_reset: The weight is linearly decreasing. Resets after x bars.
+		- manual: The weight is manually specified for each constrained bar in a list.
+		- bar_down_reset: The weight is geometrically decaying after each bar. Resets after x bars.
+		- token_down_reset: The weight is geometrically decaying after each token. Resets after x bars.
+		- token_down: The weight is geometrically decaying after each token. After the first span of x bars, the weight is set to 1.0.
+		- onset_down: The weight is geometrically decaying after each onset token. The weight is handled during the CP model.
     -   weight\_variation.nb\_bars\_group: The number of bars that are constrained.
     -   weight\_variation.ml\_weight: The fixed weight to use when weight\_variation.technique is set to 'constant'.
     -   weight\_variation.weight\_ratio: The common ratio r to use when weight\_variation.technique is set to 'bar\_down\_reset', 'token\_down\_reset' or 'token\_down'.
-    -   weight\_variation.weight\_max: The maximal value when the weight is linearly decreasing (or increasing) when weight\_variation.technique is set to 'linear\_up\_reset' or 'linear\_down\_reset'. The rate is calculated depending of the max and the min value given.
-    -   weight\_variation.weight\_min: The minimal value when the weight is linearly decreasing (or increasing) when weight\_variation.technique is set to 'linear\_up\_reset' or 'linear\_down\_reset'. The rate is calculated depending of the max and the min value given.
+    -   weight\_variation.weight\_max: The maximum value when the weight when weight\_variation.technique is set to 'linear\_up\_reset' or 'linear\_down\_reset'. The rate is calculated depending of the max and the min value given.
+    -   weight\_variation.weight\_min: The minimum value when the weight when weight\_variation.technique is set to 'linear\_up\_reset' or 'linear\_down\_reset'. The rate is calculated depending of the max and the min value given. This parameter is also used to set the minimum weight to reach when weight\_variation.technique is set to 'onset_down'.
     -   weight\_variation.weight\_per\_bar: The list of weights manually specified to use at each bar when weight\_variation.technique is set to 'manual'.
     -   model.k: The number of times each pitch of the scale must occur. This option is only relevant when the `pitchKey` or the `pitchKeyOnset` CP model is used.
 
